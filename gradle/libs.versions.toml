@@ -1,4 +1,9 @@
 [versions]
+minSdk = "24"
+targetSdk = "33"
+compileSdk = "33"
+versionCode = "1"
+versionName = "1.0"
 androidx-activity = "1.6.1"
 androidx-arch-core = "2.1.0"
 androidx-compose-animation = "1.3.0"

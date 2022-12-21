@@ -13,4 +13,5 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "FeatureToggle"
-include ':app'
+include ':sample'
+include ':feature-toggle'

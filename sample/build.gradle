@@ -5,19 +5,16 @@ plugins {
 
 android {
     namespace 'by.bulba.feature.toggle'
-    compileSdk 33
+    compileSdk libs.versions.compileSdk.get().toInteger()
 
     defaultConfig {
         applicationId "by.bulba.feature.toggle"
-        minSdk 24
-        targetSdk 33
-        versionCode 1
-        versionName "1.0"
+        minSdk libs.versions.minSdk.get().toInteger()
+        targetSdk libs.versions.targetSdk.get().toInteger()
+        versionCode libs.versions.versionCode.get().toInteger()
+        versionName libs.versions.versionName.get()
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary true
-        }
     }
 
     buildTypes {
@@ -51,6 +48,7 @@ dependencies {
     implementation libs.androidx.compose.ui.ui.graphics
     implementation libs.androidx.compose.ui.ui.tooling.preview
     implementation libs.androidx.compose.material3
+    implementation project(":feature-toggle")
     testImplementation libs.junit
 
     debugImplementation libs.androidx.compose.ui.ui.tooling
