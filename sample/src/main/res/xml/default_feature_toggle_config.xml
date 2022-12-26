@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<defaultsMap>
+    <entry>
+        <key>sample_feature_toggle</key>
+        <value>
+            {
+            "button_color":4278255360,
+            "type":"active"
+            }
+        </value>
+    </entry>
+</defaultsMap>

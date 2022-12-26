@@ -1,4 +1,4 @@
-package by.bulba.feature.toggle.ui.theme
+package by.bulba.feature.toggle.sample.ui.theme
 
 import android.app.Activity
 import android.os.Build

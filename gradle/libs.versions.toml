@@ -16,6 +16,7 @@ androidx-lifecycle = "2.5.1"
 androidx-savedstate = "1.2.0"
 org-jetbrains-kotlin = "1.7.20"
 org-jetbrains-kotlinx = "1.6.4"
+org-jetbrains-kotlinx-serialization-json = "1.4.1"
 
 [libraries]
 androidx-activity = { module = "androidx.activity:activity", version.ref = "androidx-activity" }
@@ -81,10 +82,12 @@ org-jetbrains-kotlinx-kotlinx-coroutines-android = { module = "org.jetbrains.kot
 org-jetbrains-kotlinx-kotlinx-coroutines-bom = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-bom", version.ref = "org-jetbrains-kotlinx" }
 org-jetbrains-kotlinx-kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "org-jetbrains-kotlinx" }
 org-jetbrains-kotlinx-kotlinx-coroutines-core-jvm = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm", version.ref = "org-jetbrains-kotlinx" }
+org-jetbrains-kotlinx-kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "org-jetbrains-kotlinx-serialization-json"}
 
 [plugins]
-com-android-application = "com.android.application:8.0.0-alpha09"
-com-android-library = "com.android.library:8.0.0-alpha09"
+com-android-application = "com.android.application:8.0.0-alpha10"
+com-android-library = "com.android.library:8.0.0-alpha10"
 com-github-ben-manes-versions = "com.github.ben-manes.versions:0.41.0"
 nl-littlerobots-version-catalog-update = "nl.littlerobots.version-catalog-update:0.7.0"
 org-jetbrains-kotlin-android = "org.jetbrains.kotlin.android:1.7.20"
+org-jetbrains-kotlin-serialization = "org.jetbrains.kotlin.plugin.serialization:1.8.0-RC2"

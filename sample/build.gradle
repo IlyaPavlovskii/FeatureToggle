@@ -1,14 +1,15 @@
 plugins {
     alias(libs.plugins.com.android.application)
     alias(libs.plugins.org.jetbrains.kotlin.android)
+    alias(libs.plugins.org.jetbrains.kotlin.serialization)
 }
 
 android {
-    namespace 'by.bulba.feature.toggle'
+    namespace 'by.bulba.feature.toggle.sample'
     compileSdk libs.versions.compileSdk.get().toInteger()
 
     defaultConfig {
-        applicationId "by.bulba.feature.toggle"
+        applicationId "by.bulba.feature.toggle.sample"
         minSdk libs.versions.minSdk.get().toInteger()
         targetSdk libs.versions.targetSdk.get().toInteger()
         versionCode libs.versions.versionCode.get().toInteger()
