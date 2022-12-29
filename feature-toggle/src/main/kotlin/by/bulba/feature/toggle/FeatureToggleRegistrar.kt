@@ -7,7 +7,7 @@ import kotlin.reflect.KClass
  * Common place for register [FeatureToggle] and setup feature values.
  * */
 class FeatureToggleRegistrar(
-    registeredFeatures: Set<FeatureToggle>,
+    featureToggleContainer: FeatureToggleContainer,
     private val reader: FeatureToggleReader? = null
 ) : FeatureToggleProvider {
 
@@ -15,7 +15,7 @@ class FeatureToggleRegistrar(
     private var initialized: Boolean = false
 
     init {
-        registeredFeatures
+        featureToggleContainer.getFeatureToggles()
             .map { featureToggle -> featureToggle::class to featureToggle }
             .toMap(featuresMap)
     }
@@ -24,7 +24,7 @@ class FeatureToggleRegistrar(
      * Setup feature values. Load [FeatureToggle] values from config via [FeatureToggleReader].
      * Must be called once.
      * */
-    fun setupFeatures() {
+    fun setupFeatures(): FeatureToggleRegistrar {
         require(!initialized) { "Features already initialized" }
         if (reader != null) {
             featuresMap.forEach { entry ->
@@ -36,6 +36,7 @@ class FeatureToggleRegistrar(
             }
         }
         initialized = true
+        return this
     }
 
     @Suppress("UNCHECKED_CAST")

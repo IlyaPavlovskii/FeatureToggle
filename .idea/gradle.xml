@@ -10,8 +10,11 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/debug-panel" />
             <option value="$PROJECT_DIR$/feature-toggle" />
             <option value="$PROJECT_DIR$/sample" />
+            <option value="$PROJECT_DIR$/utils" />
+            <option value="$PROJECT_DIR$/utils/design-system" />
           </set>
         </option>
       </GradleProjectSettings>

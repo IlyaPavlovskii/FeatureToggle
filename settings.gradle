@@ -13,5 +13,7 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "FeatureToggle"
-include ':sample'
+include ':debug-panel'
 include ':feature-toggle'
+include ':sample'
+include ':utils:design-system'

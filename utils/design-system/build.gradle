@@ -1,19 +1,16 @@
 plugins {
-    alias(libs.plugins.com.android.application)
+    alias(libs.plugins.com.android.library)
     alias(libs.plugins.org.jetbrains.kotlin.android)
     alias(libs.plugins.org.jetbrains.kotlin.serialization)
 }
 
 android {
-    namespace 'by.bulba.feature.toggle.sample'
+    namespace 'by.bulba.feature.toggle.design.system'
     compileSdk libs.versions.compileSdk.get().toInteger()
 
     defaultConfig {
-        applicationId "by.bulba.feature.toggle.sample"
         minSdk libs.versions.minSdk.get().toInteger()
         targetSdk libs.versions.targetSdk.get().toInteger()
-        versionCode libs.versions.versionCode.get().toInteger()
-        versionName libs.versions.versionName.get()
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -28,32 +25,20 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
     buildFeatures {
         compose true
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion '1.3.2'
+    kotlinOptions {
+        jvmTarget = '1.8'
     }
 }
 
 dependencies {
-
     implementation libs.androidx.core.core.ktx
-    implementation libs.androidx.lifecycle.lifecycle.runtime.ktx
     implementation libs.androidx.activity.activity.compose
     implementation platform(libs.androidx.compose.compose.bom)
     implementation libs.androidx.compose.ui
     implementation libs.androidx.compose.ui.ui.graphics
     implementation libs.androidx.compose.ui.ui.tooling.preview
     implementation libs.androidx.compose.material3
-    implementation project(":debug-panel")
-    implementation project(":feature-toggle")
-    implementation project(":utils:design-system")
-    testImplementation libs.junit
-
-    debugImplementation libs.androidx.compose.ui.ui.tooling
-    debugImplementation libs.androidx.compose.ui.ui.test.manifest
 }
