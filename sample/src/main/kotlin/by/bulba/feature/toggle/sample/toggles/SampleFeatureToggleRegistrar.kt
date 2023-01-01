@@ -27,9 +27,8 @@ object FeatureToggleRegistrarHolder {
                 buttonColor = 0xffff0000,
                 text = "Sample text",
                 textSize = 16f,
-                textLength = 12,
+                textLength = 50,
                 popUpEnabled = true,
-                array = intArrayOf(1, 3, 5, 7, 9, 11, 13),
                 type = SampleFeatureToggle.Type.INACTIVE,
             )
         )

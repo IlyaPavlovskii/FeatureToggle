@@ -16,7 +16,7 @@ import by.bulba.feature.toggle.get
 import by.bulba.feature.toggle.sample.toggles.FeatureToggleRegistrarHolder
 import by.bulba.feature.toggle.sample.toggles.SampleFeatureToggle
 
-class MainActivity : ComponentActivity() {
+internal class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalUnitApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +29,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                 ) {
                     Text(
-                        text = "Hello FeatureToggle! Text: ${featureToggle.text}"
+                        text = ("Hello FeatureToggle! Text: ${featureToggle.text}" +
+                            " Type: ${featureToggle.type}")
                             .substring(0, featureToggle.textLength),
                         color = Color(featureToggle.buttonColor),
                         fontSize = TextUnit(value = featureToggle.textSize, type = TextUnitType.Sp),

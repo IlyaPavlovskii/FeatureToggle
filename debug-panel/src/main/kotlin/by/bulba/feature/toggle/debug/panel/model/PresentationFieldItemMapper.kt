@@ -30,35 +30,39 @@ private class DefaultPresentationFieldItemMapper(
                 }
     }
 
-    private fun Field.toPresentationFieldItem(value: Any): PresentationFieldItem? {
-        return when (this.genericType) {
-            Long::class.java -> PresentationFieldItem.LongType(
-                title = this.name,
-                value = value as Long
-            )
+    private fun Field.toPresentationFieldItem(value: Any): PresentationFieldItem? = when {
+        this.genericType == Long::class.java -> PresentationFieldItem.LongType(
+            title = this.name,
+            value = value as Long
+        )
 
-            Int::class.java -> PresentationFieldItem.IntType(
-                title = this.name,
-                value = value as Int
-            )
+        this.genericType == Int::class.java -> PresentationFieldItem.IntType(
+            title = this.name,
+            value = value as Int
+        )
 
-            String::class.java -> PresentationFieldItem.StringType(
-                title = this.name,
-                value = value as String,
-            )
+        this.genericType == String::class.java -> PresentationFieldItem.StringType(
+            title = this.name,
+            value = value as String,
+        )
 
-            Float::class.java -> PresentationFieldItem.FloatType(
-                title = this.name,
-                value = value as Float,
-            )
+        this.genericType == Float::class.java -> PresentationFieldItem.FloatType(
+            title = this.name,
+            value = value as Float,
+        )
 
-            Boolean::class.java -> PresentationFieldItem.BooleanType(
-                title = this.name,
-                enabled = value as Boolean,
-            )
+        this.genericType == Boolean::class.java -> PresentationFieldItem.BooleanType(
+            title = this.name,
+            enabled = value as Boolean,
+        )
 
-            else -> null
-        }
+        this.type.isEnum && this.type.enumConstants.isNotEmpty() -> PresentationFieldItem.EnumType(
+            title = this.name,
+            values = this.type.enumConstants.mapNotNull { (it as? Enum<*>)?.name },
+            selectedValue = (value as Enum<*>).name
+        )
+
+        else -> null
     }
 
     companion object {

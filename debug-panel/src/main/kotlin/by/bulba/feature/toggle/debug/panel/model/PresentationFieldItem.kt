@@ -31,4 +31,10 @@ internal sealed class PresentationFieldItem {
         override val title: String,
         val value: String,
     ) : PresentationFieldItem()
+
+    data class EnumType(
+        override val title: String,
+        val selectedValue: String,
+        val values: List<String>,
+    ) : PresentationFieldItem()
 }

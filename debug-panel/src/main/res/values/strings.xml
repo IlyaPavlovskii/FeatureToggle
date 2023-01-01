@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="debug_panel__short_label">DebugPanel</string>
+    <string name="debug_panel__reset_to_default">Reset to default</string>
+    <string name="debug_panel__save">Save</string>
 </resources>

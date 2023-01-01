@@ -12,7 +12,6 @@ internal class SampleFeatureToggle(
     @SerialName("text_size") val textSize: Float,
     @SerialName("text_length") val textLength: Int,
     @SerialName("pop_up_enabled") val popUpEnabled: Boolean,
-    @SerialName("array") val array: IntArray,
     @SerialName("type") val type: Type,
 ) : FeatureToggle {
     override val toggleKey: FeatureToggleKey = TOGGLE_KEY

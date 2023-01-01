@@ -13,10 +13,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FeatureToggle"
         tools:targetApi="31">
+<!--        <activity-->
+<!--            android:name=".MainActivity"-->
+<!--            android:exported="true"-->
+<!--            android:theme="@style/Theme.FeatureToggle">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+<!--        </activity>-->
         <activity
-            android:name=".MainActivity"
+            android:name="by.bulba.feature.toggle.debug.panel.DebugPanelActivity"
             android:exported="true"
-            android:theme="@style/Theme.FeatureToggle">
+            android:icon="@mipmap/ic_debug_panel_launcher"
+            android:label="@string/debug_panel__short_label"
+            android:launchMode="singleTask"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
