@@ -1,4 +1,4 @@
-package by.bulba.feature.toggle.debug.panel.utils
+package by.bulba.feature.toggle.debug.panel.util
 
 import kotlinx.coroutines.flow.MutableStateFlow
 

@@ -1,4 +1,4 @@
-package by.bulba.feature.toggle.util
+package by.bulba.feature.toggle.debug.panel.util
 
 import android.util.Xml
 import java.io.File

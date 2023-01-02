@@ -2,7 +2,7 @@ package by.bulba.feature.toggle.debug.panel.domain
 
 import by.bulba.feature.toggle.FeatureToggleKey
 import by.bulba.feature.toggle.util.XmlConfigFileProvider
-import by.bulba.feature.toggle.util.XmlConfigWriter
+import by.bulba.feature.toggle.debug.panel.util.XmlConfigWriter
 import org.json.JSONObject
 
 internal interface SaveOverrideFieldsUseCase {

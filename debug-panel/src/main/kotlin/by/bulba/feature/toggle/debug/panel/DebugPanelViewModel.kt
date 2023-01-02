@@ -1,13 +1,11 @@
 package by.bulba.feature.toggle.debug.panel
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import by.bulba.feature.toggle.FeatureToggle
 import by.bulba.feature.toggle.FeatureToggleContainer
 import by.bulba.feature.toggle.FeatureToggleContainerHolder
 import by.bulba.feature.toggle.debug.panel.domain.SaveOverrideFieldsResult
@@ -16,16 +14,15 @@ import by.bulba.feature.toggle.debug.panel.model.DebugPanelViewState
 import by.bulba.feature.toggle.debug.panel.model.DomainFieldItemMapper
 import by.bulba.feature.toggle.debug.panel.model.PresentationFieldItem
 import by.bulba.feature.toggle.debug.panel.model.PresentationFieldItemMapper
-import by.bulba.feature.toggle.debug.panel.utils.mutate
+import by.bulba.feature.toggle.debug.panel.util.mutate
 import by.bulba.feature.toggle.reader.FeatureToggleReader
 import by.bulba.feature.toggle.reader.FeatureToggleReaderHolder
 import by.bulba.feature.toggle.util.DefaultConfigFileProvider
 import by.bulba.feature.toggle.util.XmlConfigFileProvider
-import by.bulba.feature.toggle.util.XmlConfigWriter
+import by.bulba.feature.toggle.debug.panel.util.XmlConfigWriter
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import kotlin.reflect.KClass
 
 internal class DebugPanelViewModel(
     private val fieldItemMapper: PresentationFieldItemMapper = PresentationFieldItemMapper.create(),
