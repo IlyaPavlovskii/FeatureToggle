@@ -5,7 +5,11 @@
         <value>
             {
             "button_color":4278255360,
-            "type":"active"
+            "type":"active",
+            "text": "config test",
+            "text_size": 15.0,
+            "text_length": 52,
+            "pop_up_enabled": true
             }
         </value>
     </entry>

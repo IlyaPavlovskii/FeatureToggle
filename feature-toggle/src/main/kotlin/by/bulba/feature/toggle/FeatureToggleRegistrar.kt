@@ -8,10 +8,10 @@ import kotlin.reflect.KClass
  * */
 class FeatureToggleRegistrar(
     featureToggleContainer: FeatureToggleContainer,
-    private val reader: FeatureToggleReader? = null
+    private val reader: FeatureToggleReader,
 ) : FeatureToggleProvider {
 
-    private val featuresMap = hashMapOf<KClass<out FeatureToggle>, FeatureToggle>()
+    private var featuresMap = hashMapOf<KClass<out FeatureToggle>, FeatureToggle>()
     private var initialized: Boolean = false
 
     init {
@@ -26,13 +26,11 @@ class FeatureToggleRegistrar(
      * */
     fun setupFeatures(): FeatureToggleRegistrar {
         require(!initialized) { "Features already initialized" }
-        if (reader != null) {
-            featuresMap.forEach { entry ->
-                val key = entry.key
-                val feature = entry.value
-                reader.readFeature(feature)?.also {
-                    featuresMap[key] = it
-                }
+        featuresMap.forEach { entry ->
+            val key = entry.key
+            val feature = entry.value
+            reader.readFeature(feature)?.also {
+                featuresMap[key] = it
             }
         }
         initialized = true

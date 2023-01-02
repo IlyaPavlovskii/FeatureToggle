@@ -6,6 +6,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
+@SerialName("sample_feature_toggle")
 internal class SampleFeatureToggle(
     @SerialName("button_color") val buttonColor: Long,
     @SerialName("text") val text: String,

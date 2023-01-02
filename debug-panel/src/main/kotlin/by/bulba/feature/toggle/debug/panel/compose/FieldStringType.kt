@@ -1,6 +1,5 @@
 package by.bulba.feature.toggle.debug.panel.compose
 
-import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -12,15 +11,16 @@ import by.bulba.feature.toggle.debug.panel.model.PresentationFieldItem
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun FieldStringType(item: PresentationFieldItem.StringType) {
+internal fun FieldStringType(
+    item: PresentationFieldItem.StringType,
+    onValueChange: (newValue: String) -> Unit,
+) {
     Column(modifier = fieldModifier) {
         Text(text = item.title)
         TextField(
             value = item.value,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-            onValueChange = { newValue ->
-                Log.d("FieldStringType", "NewValue: $newValue")
-            }
+            onValueChange = onValueChange,
         )
     }
 }

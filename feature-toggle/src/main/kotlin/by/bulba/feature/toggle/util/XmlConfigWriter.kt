@@ -1,12 +1,10 @@
 package by.bulba.feature.toggle.util
 
-import android.content.Context
-import android.os.Environment
 import android.util.Xml
 import java.io.File
 import java.io.StringWriter
 
-internal class XmlConfigWriter {
+class XmlConfigWriter {
 
     fun write(file: File?, featureToggles: Map<String, String>): Boolean {
         val writer = StringWriter()

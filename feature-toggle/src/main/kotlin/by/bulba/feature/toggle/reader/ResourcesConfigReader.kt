@@ -4,11 +4,9 @@ import android.util.Log
 import by.bulba.feature.toggle.FeatureToggle
 import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.SerializationException
-import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
 import java.lang.ref.WeakReference
-import kotlin.reflect.typeOf
 
 /**
  * Processes configuration from default local XML config.

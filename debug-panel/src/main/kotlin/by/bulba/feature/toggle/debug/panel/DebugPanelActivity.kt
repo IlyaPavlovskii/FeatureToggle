@@ -4,11 +4,12 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -16,12 +17,14 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
@@ -33,12 +36,17 @@ import by.bulba.feature.toggle.debug.panel.compose.FieldHeader
 import by.bulba.feature.toggle.debug.panel.compose.FieldIntType
 import by.bulba.feature.toggle.debug.panel.compose.FieldLongType
 import by.bulba.feature.toggle.debug.panel.compose.FieldStringType
+import by.bulba.feature.toggle.debug.panel.model.DebugPanelViewState
 import by.bulba.feature.toggle.debug.panel.model.PresentationFieldItem
 import by.bulba.feature.toggle.design.system.theme.FeatureToggleTheme
 
 internal class DebugPanelActivity : ComponentActivity() {
 
-    private val viewModel: DebugPanelViewModel by viewModels()
+    private val viewModel: DebugPanelViewModel by viewModels {
+        DebugPanelViewModel.factory(
+            applicationContext = this@DebugPanelActivity.applicationContext
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,37 +56,74 @@ internal class DebugPanelActivity : ComponentActivity() {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                 ) {
-                    DebugPanelContent(
-                        onResetToDefaultClick = viewModel::resetToDefault,
-                        onSaveClick = viewModel::save
-                    )
+                    val viewState = viewModel.viewState.collectAsState()
+                    when (val value = viewState.value) {
+                        is DebugPanelViewState.Content ->
+                            DebugPanelContent(
+                                viewState = value,
+                                onResetToDefaultClick = viewModel::resetToDefault,
+                                onSaveClick = viewModel::save
+                            )
+
+                        DebugPanelViewState.Loading -> DebugPanelLoading()
+                    }
                 }
             }
         }
     }
 
     @Composable
+    private fun DebugPanelLoading() {
+        Box(
+            contentAlignment = Alignment.Center,
+        ) {
+            CircularProgressIndicator()
+        }
+    }
+
+    @Composable
     private fun DebugPanelContent(
+        viewState: DebugPanelViewState.Content,
         onResetToDefaultClick: () -> Unit,
         onSaveClick: () -> Unit,
     ) {
-        val viewState = viewModel.viewState.collectAsState()
         Column(modifier = Modifier.fillMaxSize()) {
             LazyColumn(
                 modifier = Modifier
                     .padding(horizontal = 16.dp)
+                    .fillMaxHeight()
                     .weight(1f, false),
             ) {
                 items(
-                    items = viewState.value.items,
+                    items = viewState.items,
                     itemContent = { item ->
                         when (item) {
                             is PresentationFieldItem.Header -> FieldHeader(item = item)
-                            is PresentationFieldItem.IntType -> FieldIntType(item = item)
-                            is PresentationFieldItem.FloatType -> FieldFloatType(item = item)
-                            is PresentationFieldItem.LongType -> FieldLongType(item = item)
-                            is PresentationFieldItem.BooleanType -> FieldBooleanType(item = item)
-                            is PresentationFieldItem.StringType -> FieldStringType(item = item)
+                            is PresentationFieldItem.IntType -> FieldIntType(item = item) { newValue ->
+                                viewModel.updateIntValue(oldItem = item, newValue = newValue)
+                            }
+
+                            is PresentationFieldItem.FloatType -> FieldFloatType(item = item) { newValue ->
+                                viewModel.updateFloatValue(oldItem = item, newValue = newValue)
+                            }
+
+                            is PresentationFieldItem.LongType -> FieldLongType(item = item) { newValue ->
+                                viewModel.updateLongValue(oldItem = item, newValue = newValue)
+                            }
+
+                            is PresentationFieldItem.BooleanType ->
+                                FieldBooleanType(item = item) { newValue ->
+                                    viewModel.updateBooleanValue(
+                                        oldItem = item,
+                                        newValue = newValue
+                                    )
+                                }
+
+                            is PresentationFieldItem.StringType ->
+                                FieldStringType(item = item) { newValue ->
+                                    viewModel.updateStringValue(oldItem = item, newValue = newValue)
+                                }
+
                             is PresentationFieldItem.EnumType ->
                                 FieldEnumType(item = item) { newValue ->
                                     viewModel.selectEnumValue(item, newValue)
@@ -96,7 +141,7 @@ internal class DebugPanelActivity : ComponentActivity() {
                         containerColor = Color.Transparent,
                     ),
                     shape = RoundedCornerShape(16.dp),
-                    enabled = viewState.value.resetToDefaultAvailable,
+                    enabled = viewState.resetToDefaultAvailable,
                     onClick = onResetToDefaultClick,
                 ) {
                     Text(
@@ -121,7 +166,7 @@ internal class DebugPanelActivity : ComponentActivity() {
                         contentColor = Color.Transparent,
                         containerColor = Color.Transparent,
                     ),
-                    enabled = viewState.value.saveAvailable,
+                    enabled = viewState.saveAvailable,
                     shape = RoundedCornerShape(16.dp),
                     onClick = onSaveClick,
                 ) {
