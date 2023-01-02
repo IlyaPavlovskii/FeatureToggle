@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <defaultsMap>
     <entry>
-        <key>sample_feature_toggle</key>
-        <value>
-            {
-            "button_color":4278255361,
-            "type":"active",
-            "text": "config test value",
-            "text_size": 15.7,
-            "text_length": 52,
-            "pop_up_enabled": true
+        <key>menu_item</key>
+        <value>{
+            "enabled":true,
+            "type":"GRID",
+            "grid_count":2,
+            "add_to_cart_available":true
             }
         </value>
     </entry>

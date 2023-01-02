@@ -27,7 +27,7 @@ object FeatureToggleRegistrarHolder {
             MenuItemFeatureToggle(
                 enabled = true,
                 gridCount = 3,
-                type = MenuItemFeatureToggle.PreviewType.GRID,
+                type = MenuItemFeatureToggle.PreviewType.HORIZONTAL_LIST,
                 addToCartAvailable = true,
             )
         )

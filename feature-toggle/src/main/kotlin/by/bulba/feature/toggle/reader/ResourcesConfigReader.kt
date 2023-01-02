@@ -16,8 +16,6 @@ class ResourcesConfigReader(
     private val configReader: ConfigReader,
 ) : FeatureToggleReader {
 
-    private var configMap: WeakReference<Map<String, String>?> = WeakReference(null)
-
     @OptIn(InternalSerializationApi::class)
     override fun readFeature(feature: FeatureToggle): FeatureToggle? {
         val config = fetchConfig()
@@ -36,14 +34,7 @@ class ResourcesConfigReader(
         return null
     }
 
-    private fun fetchConfig(): Map<String, String> {
-        var config = configMap.get()
-        if (config == null) {
-            config = configReader.readConfig()
-            configMap = WeakReference(config)
-        }
-        return config
-    }
+    private fun fetchConfig(): Map<String, String> = configReader.readConfig()
 
     private class LocalToggleKeyNotExistError(toggleKey: String) :
         Throwable(message = "Resources config doesn't have key '$toggleKey'")

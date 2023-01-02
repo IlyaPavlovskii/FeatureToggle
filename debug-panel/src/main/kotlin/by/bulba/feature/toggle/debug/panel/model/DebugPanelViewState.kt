@@ -3,7 +3,7 @@ package by.bulba.feature.toggle.debug.panel.model
 import androidx.annotation.StringRes
 
 internal data class DebugPanelViewState(
-    val resetToDefaultAvailable: Boolean,
+    val dropConfigAvailable: Boolean,
     val saveAvailable: Boolean,
     val items: List<PresentationFieldItem>,
     val dialog: Dialog? = null,
@@ -18,7 +18,7 @@ internal data class DebugPanelViewState(
 
     companion object {
         val DEFAULT = DebugPanelViewState(
-            resetToDefaultAvailable = false,
+            dropConfigAvailable = false,
             saveAvailable = false,
             items = emptyList(),
         )

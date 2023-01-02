@@ -46,50 +46,14 @@ internal class DebugPanelViewModel(
         initValues()
     }
 
-    fun resetToDefault() {
+    fun dropConfig() {
         xmlConfigFileProvider.getFeatureToggleFile()?.delete()
         initValues()
         _viewState.mutate {
             this.copy(
                 items = initialItems,
-                resetToDefaultAvailable = false,
+                dropConfigAvailable = false,
                 saveAvailable = false,
-            )
-        }
-    }
-
-    fun updateBooleanValue(oldItem: PresentationFieldItem.BooleanType, newValue: Boolean) =
-        updateValue(oldItem = oldItem, newItem = oldItem.copy(enabled = newValue))
-
-    fun updateFloatValue(oldItem: PresentationFieldItem.FloatType, newValue: Float) =
-        updateValue(oldItem = oldItem, newItem = oldItem.copy(value = newValue))
-
-    fun updateLongValue(oldItem: PresentationFieldItem.LongType, newValue: Long) =
-        updateValue(oldItem = oldItem, newItem = oldItem.copy(value = newValue))
-
-    fun updateIntValue(oldItem: PresentationFieldItem.IntType, newValue: Int) =
-        updateValue(oldItem = oldItem, newItem = oldItem.copy(value = newValue))
-
-    fun updateStringValue(oldItem: PresentationFieldItem.StringType, newValue: String) =
-        updateValue(oldItem = oldItem, newItem = oldItem.copy(value = newValue))
-
-    fun selectEnumValue(item: PresentationFieldItem.EnumType, newValue: String) =
-        updateValue(oldItem = item, newItem = item.copy(selectedValue = newValue))
-
-    private fun updateValue(oldItem: PresentationFieldItem, newItem: PresentationFieldItem) {
-        _viewState.mutate {
-            val newItems = this.items.map { fieldItem ->
-                if (fieldItem == oldItem) {
-                    newItem
-                } else {
-                    fieldItem
-                }
-            }
-            val saveAvailable = newItems != initialItems
-            this.copy(
-                items = newItems,
-                resetToDefaultAvailable = saveAvailable,
-                saveAvailable = saveAvailable,
             )
         }
     }
@@ -126,6 +90,46 @@ internal class DebugPanelViewModel(
         }
     }
 
+    fun dismissDialog() {
+        _viewState.mutate { this.copy(dialog = null) }
+    }
+
+    fun updateBooleanValue(oldItem: PresentationFieldItem.BooleanType, newValue: Boolean) =
+        updateValue(oldItem = oldItem, newItem = oldItem.copy(enabled = newValue))
+
+    fun updateFloatValue(oldItem: PresentationFieldItem.FloatType, newValue: Float) =
+        updateValue(oldItem = oldItem, newItem = oldItem.copy(value = newValue))
+
+    fun updateLongValue(oldItem: PresentationFieldItem.LongType, newValue: Long) =
+        updateValue(oldItem = oldItem, newItem = oldItem.copy(value = newValue))
+
+    fun updateIntValue(oldItem: PresentationFieldItem.IntType, newValue: Int) =
+        updateValue(oldItem = oldItem, newItem = oldItem.copy(value = newValue))
+
+    fun updateStringValue(oldItem: PresentationFieldItem.StringType, newValue: String) =
+        updateValue(oldItem = oldItem, newItem = oldItem.copy(value = newValue))
+
+    fun selectEnumValue(item: PresentationFieldItem.EnumType, newValue: String) =
+        updateValue(oldItem = item, newItem = item.copy(selectedValue = newValue))
+
+    private fun updateValue(oldItem: PresentationFieldItem, newItem: PresentationFieldItem) {
+        _viewState.mutate {
+            val newItems = this.items.map { fieldItem ->
+                if (fieldItem == oldItem) {
+                    newItem
+                } else {
+                    fieldItem
+                }
+            }
+            val saveAvailable = newItems != initialItems
+            this.copy(
+                items = newItems,
+                dropConfigAvailable = saveAvailable,
+                saveAvailable = saveAvailable,
+            )
+        }
+    }
+
     private fun initValues() {
         viewModelScope.launch {
             val items = featureToggleContainer.getFeatureToggles()
@@ -136,15 +140,11 @@ internal class DebugPanelViewModel(
             initialItems.clear()
             initialItems.addAll(items)
             _viewState.value = DebugPanelViewState(
-                resetToDefaultAvailable = false,
+                dropConfigAvailable = xmlConfigFileProvider.getFeatureToggleFile()?.exists() == true,
                 saveAvailable = false,
                 items = items,
             )
         }
-    }
-
-    fun dismissDialog() {
-        _viewState.mutate { this.copy(dialog = null) }
     }
 
     companion object {

@@ -33,4 +33,6 @@ android {
 dependencies {
     implementation libs.androidx.core.core.ktx
     api libs.org.jetbrains.kotlinx.kotlinx.serialization.json
+    implementation platform(libs.firebase.bom)
+    implementation libs.firebase.config.ktx
 }

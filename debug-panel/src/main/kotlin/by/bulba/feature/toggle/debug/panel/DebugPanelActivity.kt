@@ -64,7 +64,7 @@ internal class DebugPanelActivity : ComponentActivity() {
                     } else {
                         DebugPanelContent(
                             viewState = value,
-                            onResetToDefaultClick = viewModel::resetToDefault,
+                            onResetToDefaultClick = viewModel::dropConfig,
                             onSaveClick = viewModel::save,
                             onDismissDialogClick = viewModel::dismissDialog,
                         )
@@ -144,11 +144,11 @@ internal class DebugPanelActivity : ComponentActivity() {
                         containerColor = Color.Transparent,
                     ),
                     shape = RoundedCornerShape(16.dp),
-                    enabled = viewState.resetToDefaultAvailable,
+                    enabled = viewState.dropConfigAvailable,
                     onClick = onResetToDefaultClick,
                 ) {
                     Text(
-                        text = stringResource(id = R.string.debug_panel__reset_to_default),
+                        text = stringResource(id = R.string.debug_panel__drop_config),
                         color = MaterialTheme.colorScheme.primary,
                         style = MaterialTheme.typography.labelLarge,
                     )
