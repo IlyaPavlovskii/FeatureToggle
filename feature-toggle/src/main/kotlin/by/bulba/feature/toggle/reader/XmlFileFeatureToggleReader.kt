@@ -17,8 +17,6 @@ class XmlFileFeatureToggleReader(
     private val xmlConfigFileProvider: XmlConfigFileProvider,
 ) : FeatureToggleReader {
 
-    private var configMap: Map<String, String> = WeakHashMap()
-
     override fun readFeature(feature: FeatureToggle): FeatureToggle? {
         val config = fetchConfig()
         val jsonString = config[feature.toggleKey.key]
@@ -37,11 +35,8 @@ class XmlFileFeatureToggleReader(
         return null
     }
 
-    private fun fetchConfig(): Map<String, String> {
-        val config = xmlConfigReader.readConfig(xmlConfigFileProvider.getFeatureToggleFile())
-        configMap = WeakHashMap(config)
-        return configMap
-    }
+    private fun fetchConfig(): Map<String, String> =
+        xmlConfigReader.readConfig(xmlConfigFileProvider.getFeatureToggleFile())
 
     private companion object {
         private const val TAG = "XmlFileFeatureToggleReader"

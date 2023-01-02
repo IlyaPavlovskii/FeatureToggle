@@ -4,10 +4,10 @@
         <key>sample_feature_toggle</key>
         <value>
             {
-            "button_color":4278255360,
+            "button_color":4278255361,
             "type":"active",
-            "text": "config test",
-            "text_size": 15.0,
+            "text": "config test value",
+            "text_size": 15.7,
             "text_length": 52,
             "pop_up_enabled": true
             }

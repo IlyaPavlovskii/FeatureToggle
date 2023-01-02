@@ -3,4 +3,10 @@
     <string name="debug_panel__short_label">DebugPanel</string>
     <string name="debug_panel__reset_to_default">Reset to default</string>
     <string name="debug_panel__save">Save</string>
+    <string name="debug_panel__failed_to_save_file">Failed to save file</string>
+    <string name="debug_panel__cancel">Cancel</string>
+    <string name="debug_panel__config_successfully_saved">Config successfully saved</string>
+    <string name="debug_panel__ok">OK</string>
+    <string name="debug_panel__success">Success</string>
+    <string name="debug_panel__error">Error</string>
 </resources>

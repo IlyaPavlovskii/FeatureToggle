@@ -16,6 +16,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ripple.rememberRipple
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
@@ -57,15 +58,16 @@ internal class DebugPanelActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                 ) {
                     val viewState = viewModel.viewState.collectAsState()
-                    when (val value = viewState.value) {
-                        is DebugPanelViewState.Content ->
-                            DebugPanelContent(
-                                viewState = value,
-                                onResetToDefaultClick = viewModel::resetToDefault,
-                                onSaveClick = viewModel::save
-                            )
-
-                        DebugPanelViewState.Loading -> DebugPanelLoading()
+                    val value = viewState.value
+                    if (value.isLoading()) {
+                        DebugPanelLoading()
+                    } else {
+                        DebugPanelContent(
+                            viewState = value,
+                            onResetToDefaultClick = viewModel::resetToDefault,
+                            onSaveClick = viewModel::save,
+                            onDismissDialogClick = viewModel::dismissDialog,
+                        )
                     }
                 }
             }
@@ -83,9 +85,10 @@ internal class DebugPanelActivity : ComponentActivity() {
 
     @Composable
     private fun DebugPanelContent(
-        viewState: DebugPanelViewState.Content,
+        viewState: DebugPanelViewState,
         onResetToDefaultClick: () -> Unit,
         onSaveClick: () -> Unit,
+        onDismissDialogClick: () -> Unit,
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
             LazyColumn(
@@ -178,6 +181,22 @@ internal class DebugPanelActivity : ComponentActivity() {
                 }
             }
         }
-
+        viewState.dialog?.also {dialog ->
+            AlertDialog(
+                title = {
+                    Text(text = stringResource(id = dialog.title))
+                },
+                text = {
+                    Text(text = stringResource(id = dialog.message))
+                },
+                confirmButton = {
+                    Text(
+                        modifier = Modifier.clickable { onDismissDialogClick() },
+                        text = stringResource(id = dialog.button)
+                    )
+                },
+                onDismissRequest = onDismissDialogClick,
+            )
+        }
     }
 }

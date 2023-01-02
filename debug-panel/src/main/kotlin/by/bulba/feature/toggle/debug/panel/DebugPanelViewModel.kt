@@ -1,6 +1,7 @@
 package by.bulba.feature.toggle.debug.panel
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
@@ -9,7 +10,10 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import by.bulba.feature.toggle.FeatureToggle
 import by.bulba.feature.toggle.FeatureToggleContainer
 import by.bulba.feature.toggle.FeatureToggleContainerHolder
+import by.bulba.feature.toggle.debug.panel.domain.SaveOverrideFieldsResult
+import by.bulba.feature.toggle.debug.panel.domain.SaveOverrideFieldsUseCase
 import by.bulba.feature.toggle.debug.panel.model.DebugPanelViewState
+import by.bulba.feature.toggle.debug.panel.model.DomainFieldItemMapper
 import by.bulba.feature.toggle.debug.panel.model.PresentationFieldItem
 import by.bulba.feature.toggle.debug.panel.model.PresentationFieldItemMapper
 import by.bulba.feature.toggle.debug.panel.utils.mutate
@@ -18,35 +22,41 @@ import by.bulba.feature.toggle.reader.FeatureToggleReaderHolder
 import by.bulba.feature.toggle.util.DefaultConfigFileProvider
 import by.bulba.feature.toggle.util.XmlConfigFileProvider
 import by.bulba.feature.toggle.util.XmlConfigWriter
-import by.bulba.feature.toggle.util.XmlFileConfigReader
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import kotlinx.serialization.json.Json
 import kotlin.reflect.KClass
 
 internal class DebugPanelViewModel(
     private val fieldItemMapper: PresentationFieldItemMapper = PresentationFieldItemMapper.create(),
     private val featureToggleContainer: FeatureToggleContainer = FeatureToggleContainerHolder.getContainer(),
-    private val xmlFileConfigReader: XmlFileConfigReader = XmlFileConfigReader(),
-    private val xmlConfigWriter: XmlConfigWriter = XmlConfigWriter(),
     private val reader: FeatureToggleReader = FeatureToggleReaderHolder.getFeatureToggleReader(),
-    private val json: Json = Json.Default,
+    private val xmlConfigWriter: XmlConfigWriter = XmlConfigWriter(),
     private val xmlConfigFileProvider: XmlConfigFileProvider,
+    private val domainFieldItemMapper: DomainFieldItemMapper =
+        DomainFieldItemMapper.create(featureToggleContainer),
+    private val saveOverrideFieldsUseCase: SaveOverrideFieldsUseCase = SaveOverrideFieldsUseCase
+        .create(
+            xmlConfigFileProvider = xmlConfigFileProvider,
+            xmlConfigWriter = xmlConfigWriter,
+        )
 ) : ViewModel() {
     private val initialItems: MutableList<PresentationFieldItem> = mutableListOf()
-    private val _viewState = MutableStateFlow<DebugPanelViewState>(DebugPanelViewState.Loading)
+    private val _viewState = MutableStateFlow(DebugPanelViewState.DEFAULT)
     val viewState: StateFlow<DebugPanelViewState> = _viewState
 
     init {
-        viewModelScope.launch {
-            val items = featureToggleContainer.getFeatureToggles()
-                .flatMap(fieldItemMapper::convert)
-            initialItems.addAll(items)
-            _viewState.value = DebugPanelViewState.Content(
+        initValues()
+    }
+
+    fun resetToDefault() {
+        xmlConfigFileProvider.getFeatureToggleFile()?.delete()
+        initValues()
+        _viewState.mutate {
+            this.copy(
+                items = initialItems,
                 resetToDefaultAvailable = false,
                 saveAvailable = false,
-                items = items,
             )
         }
     }
@@ -71,99 +81,70 @@ internal class DebugPanelViewModel(
 
     private fun updateValue(oldItem: PresentationFieldItem, newItem: PresentationFieldItem) {
         _viewState.mutate {
-            when (this) {
-                is DebugPanelViewState.Content -> {
-                    val newItems = this.items.map { fieldItem ->
-                        if (fieldItem == oldItem) {
-                            newItem
-                        } else {
-                            fieldItem
-                        }
-                    }
-                    val saveAvailable = newItems != initialItems
-                    this.copy(
-                        items = newItems,
-                        resetToDefaultAvailable = saveAvailable,
-                        saveAvailable = saveAvailable,
-                    )
+            val newItems = this.items.map { fieldItem ->
+                if (fieldItem == oldItem) {
+                    newItem
+                } else {
+                    fieldItem
                 }
-
-                DebugPanelViewState.Loading -> error("Unexpected Loading view state")
             }
-        }
-    }
-
-    fun resetToDefault() {
-        _viewState.mutate {
-            when(this) {
-                is DebugPanelViewState.Content -> this.copy(
-                    items = initialItems,
-                    resetToDefaultAvailable = false,
-                    saveAvailable = false,
-                )
-                DebugPanelViewState.Loading -> error("Unexpected Loading view state")
-            }
+            val saveAvailable = newItems != initialItems
+            this.copy(
+                items = newItems,
+                resetToDefaultAvailable = saveAvailable,
+                saveAvailable = saveAvailable,
+            )
         }
     }
 
     fun save() {
-//        viewModelScope.launch {
-//
-//            _viewState.value = DebugPanelViewState.Loading
-//            val featuresMap = getFeaturesMap()
-//            val newXmlMap = featuresMap.associate {featureToggle ->
-//                //featureToggle.toXmlJsonPair(json, requireNotNull(_data.value))
-//                featureToggle.toXmlJsonPair(json, emptyList())
-//            }
-//            val defaultMap = xmlFileConfigReader.readConfig(
-//                file = xmlConfigFileProvider.getTmpDebugChangesToggleFile()
-//            )
-//            val updatedMap = newXmlMap.filter { (key, value) -> defaultMap[key] != value }
-//            //logDebug(TAG, "Updating:\n${updatedMap.map { it.toPair() }.joinToString("\n")}")
-//            val isWriteSuccess = xmlConfigWriter.write(
-//                file = xmlConfigFileProvider.getFeatureToggleFile(),
-//                featureToggles = updatedMap
-//            )
-//        }
-        val items = featureToggleContainer.getFeatureToggles().flatMap(fieldItemMapper::convert)
-        _viewState.value = DebugPanelViewState.Content(
-            resetToDefaultAvailable = true,
-            saveAvailable = true,
-            items = items,
-        )
-    }
-
-    private suspend fun updateToggles() {
-//        val overriddenKeys = xmlFileConfigReader
-//            .readConfig(file = xmlConfigFileProvider.getFeatureToggleFile())
-//            .keys
-//        if (overriddenKeys.isEmpty()) {
-//            val noLocalChangesState = getFeaturesMap().associate { it.toXmlJsonPair(json, emptyList()) }
-//            xmlConfigWriter.write(
-//                file = xmlConfigFileProvider.getTmpDebugChangesToggleFile(),
-//                featureToggles = noLocalChangesState
-//            )
-//        }
-//        delay(FILE_MANIPULATION_DELAY)
-//        _data.value = getFeaturesMap().flatMap {
-//            val isOverridden = overriddenKeys.contains(it.toggleKey.key)
-//            it.toUiModel(json, isOverridden)
-//        }
-    }
-
-    private fun getFeaturesMap(): List<FeatureToggle> {
-        val featuresMap: MutableMap<KClass<out FeatureToggle>, FeatureToggle> =
-            featureToggleContainer
-                .getFeatureToggles()
-                .associateBy { featureToggle -> featureToggle::class }
-                .toMutableMap()
-        featuresMap.forEach { entry ->
-            val key = entry.key
-            val feature = entry.value
-            reader.readFeature(feature)
-                ?.also { featureToggle -> featuresMap[key] = featureToggle }
+        viewModelScope.launch {
+            val content = _viewState.value
+            val input = domainFieldItemMapper.convert(content.items)
+            when(saveOverrideFieldsUseCase.execute(input)) {
+                SaveOverrideFieldsResult.FileSaveError -> {
+                    _viewState.mutate {
+                        this.copy(
+                            dialog = DebugPanelViewState.Dialog(
+                                title = R.string.debug_panel__error,
+                                message = R.string.debug_panel__failed_to_save_file,
+                                button = R.string.debug_panel__cancel,
+                            )
+                        )
+                    }
+                }
+                SaveOverrideFieldsResult.Success -> {
+                    _viewState.mutate {
+                        this.copy(
+                            dialog = DebugPanelViewState.Dialog(
+                                title = R.string.debug_panel__success,
+                                message = R.string.debug_panel__config_successfully_saved,
+                                button = R.string.debug_panel__ok,
+                            )
+                        )
+                    }
+                }
+            }
         }
-        return featuresMap.values.toList()
+    }
+
+    private fun initValues() {
+        viewModelScope.launch {
+            val items = featureToggleContainer.getFeatureToggles()
+                .mapNotNull(reader::readFeature)
+                .flatMap(fieldItemMapper::convert)
+            initialItems.clear()
+            initialItems.addAll(items)
+            _viewState.value = DebugPanelViewState(
+                resetToDefaultAvailable = false,
+                saveAvailable = false,
+                items = items,
+            )
+        }
+    }
+
+    fun dismissDialog() {
+        _viewState.mutate { this.copy(dialog = null) }
     }
 
     companion object {

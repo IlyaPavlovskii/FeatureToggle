@@ -43,17 +43,17 @@ object FeatureToggleRegistrarHolder {
         )
         val featureToggleReader = ChainFeatureToggleReader(
             featureReaders = arrayOf(
-                ResourcesConfigReader(
-                    json = json,
-                    configReader = xmlConfigReader,
-                ),
                 XmlFileFeatureToggleReader(
                     json = json,
                     xmlConfigReader = XmlFileConfigReader(),
                     xmlConfigFileProvider = DefaultConfigFileProvider(
                         applicationContext = context,
                     ),
-                )
+                ),
+                ResourcesConfigReader(
+                    json = json,
+                    configReader = xmlConfigReader,
+                ),
             )
         )
         FeatureToggleContainerHolder.init(featureToggleContainer)
