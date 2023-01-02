@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">FeatureToggle</string>
+    <string name="menu_item__burger">Burger</string>
+    <string name="menu_item__pizza">Pizza</string>
+    <string name="menu_item__kebab">Kebab</string>
+    <string name="menu_item__salad">Salad</string>
+    <string name="menu_item__soup">Soup</string>
+    <string name="menu_item__sushi">Sushi</string>
+    <string name="menu_item__dumpling">Dumpling</string>
+    <string name="menu_item__image_content_description">Menu image content</string>
+    <string name="menu_item__add_to_cart_content_description">"Add to cart "</string>
 </resources>

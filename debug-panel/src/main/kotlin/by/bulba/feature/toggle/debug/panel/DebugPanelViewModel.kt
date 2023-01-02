@@ -14,12 +14,12 @@ import by.bulba.feature.toggle.debug.panel.model.DebugPanelViewState
 import by.bulba.feature.toggle.debug.panel.model.DomainFieldItemMapper
 import by.bulba.feature.toggle.debug.panel.model.PresentationFieldItem
 import by.bulba.feature.toggle.debug.panel.model.PresentationFieldItemMapper
+import by.bulba.feature.toggle.debug.panel.util.XmlConfigWriter
 import by.bulba.feature.toggle.debug.panel.util.mutate
 import by.bulba.feature.toggle.reader.FeatureToggleReader
 import by.bulba.feature.toggle.reader.FeatureToggleReaderHolder
 import by.bulba.feature.toggle.util.DefaultConfigFileProvider
 import by.bulba.feature.toggle.util.XmlConfigFileProvider
-import by.bulba.feature.toggle.debug.panel.util.XmlConfigWriter
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -98,7 +98,7 @@ internal class DebugPanelViewModel(
         viewModelScope.launch {
             val content = _viewState.value
             val input = domainFieldItemMapper.convert(content.items)
-            when(saveOverrideFieldsUseCase.execute(input)) {
+            when (saveOverrideFieldsUseCase.execute(input)) {
                 SaveOverrideFieldsResult.FileSaveError -> {
                     _viewState.mutate {
                         this.copy(
@@ -110,6 +110,7 @@ internal class DebugPanelViewModel(
                         )
                     }
                 }
+
                 SaveOverrideFieldsResult.Success -> {
                     _viewState.mutate {
                         this.copy(
@@ -128,7 +129,9 @@ internal class DebugPanelViewModel(
     private fun initValues() {
         viewModelScope.launch {
             val items = featureToggleContainer.getFeatureToggles()
-                .mapNotNull(reader::readFeature)
+                .map { basicFeatureToggle ->
+                    reader.readFeature(basicFeatureToggle) ?: basicFeatureToggle
+                }
                 .flatMap(fieldItemMapper::convert)
             initialItems.clear()
             initialItems.addAll(items)

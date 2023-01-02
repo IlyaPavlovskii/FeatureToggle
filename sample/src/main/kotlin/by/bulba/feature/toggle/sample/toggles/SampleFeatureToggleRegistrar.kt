@@ -24,13 +24,11 @@ object FeatureToggleRegistrarHolder {
 
     private val featureToggleContainer: FeatureToggleContainer = SimpleFeatureToggleContainer(
         featureToggles = setOf(
-            SampleFeatureToggle(
-                buttonColor = 0xffff0000,
-                text = "Sample text",
-                textSize = 16f,
-                textLength = 50,
-                popUpEnabled = true,
-                type = SampleFeatureToggle.Type.INACTIVE,
+            MenuItemFeatureToggle(
+                enabled = true,
+                gridCount = 3,
+                type = MenuItemFeatureToggle.PreviewType.GRID,
+                addToCartAvailable = true,
             )
         )
     )
