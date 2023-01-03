@@ -9,5 +9,12 @@
             "add_to_cart_available":true
             }
         </value>
+        <key>restaurant_info</key>
+        <value>{
+            "map_visible": false,
+            "delivery_costs_visible": true,
+            "rating_visible":true
+            }
+        </value>
     </entry>
 </defaultsMap>

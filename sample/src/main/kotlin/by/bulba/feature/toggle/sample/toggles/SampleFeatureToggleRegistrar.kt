@@ -31,6 +31,11 @@ object FeatureToggleRegistrarHolder {
                 enabled = true,
                 title = "Sample FeatureToggle",
             ),
+            RestaurantInfoFeatureToggle(
+                mapVisible = true,
+                deliveryCostsVisible = true,
+                ratingVisible = true,
+            ),
             MenuItemFeatureToggle(
                 enabled = true,
                 gridCount = 3,
