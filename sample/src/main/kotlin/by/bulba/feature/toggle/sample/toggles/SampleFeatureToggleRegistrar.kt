@@ -27,6 +27,10 @@ object FeatureToggleRegistrarHolder {
 
     private val featureToggleContainer: FeatureToggleContainer = SimpleFeatureToggleContainer(
         featureToggles = setOf(
+            SampleTitleFeatureToggle(
+                enabled = true,
+                title = "Sample FeatureToggle",
+            ),
             MenuItemFeatureToggle(
                 enabled = true,
                 gridCount = 3,
