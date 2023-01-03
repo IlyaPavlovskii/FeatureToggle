@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "628504908624",
+    "project_id": "by-bulba-feature-toggle",
+    "storage_bucket": "by-bulba-feature-toggle.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:628504908624:android:9829a079a2e3dcbea7d255",
+        "android_client_info": {
+          "package_name": "by.bulba.feature.toggle"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "628504908624-9oljiqgvmnvp4jcpke6m179ja66plhta.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgdU45HZOTcAOyK9bdJi9PHlV4ASCGnqM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "628504908624-9oljiqgvmnvp4jcpke6m179ja66plhta.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:628504908624:android:ae843a85e0c6b495a7d255",
+        "android_client_info": {
+          "package_name": "by.bulba.feature.toggle.sample"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "628504908624-9oljiqgvmnvp4jcpke6m179ja66plhta.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgdU45HZOTcAOyK9bdJi9PHlV4ASCGnqM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "628504908624-9oljiqgvmnvp4jcpke6m179ja66plhta.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.com.android.application)
     alias(libs.plugins.org.jetbrains.kotlin.android)
     alias(libs.plugins.org.jetbrains.kotlin.serialization)
+    alias(libs.plugins.google.services)
 }
 
 android {
@@ -52,6 +53,9 @@ dependencies {
     implementation project(":debug-panel")
     implementation project(":feature-toggle")
     implementation project(":utils:design-system")
+    implementation platform(libs.firebase.bom)
+    implementation libs.firebase.config.ktx
+
     testImplementation libs.junit
 
     debugImplementation libs.androidx.compose.ui.ui.tooling

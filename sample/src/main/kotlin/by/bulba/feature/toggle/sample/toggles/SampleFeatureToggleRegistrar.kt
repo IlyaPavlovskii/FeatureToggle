@@ -9,13 +9,16 @@ import by.bulba.feature.toggle.FeatureToggleRegistrar
 import by.bulba.feature.toggle.SimpleFeatureToggleContainer
 import by.bulba.feature.toggle.reader.ChainFeatureToggleReader
 import by.bulba.feature.toggle.reader.FeatureToggleReaderHolder
-import by.bulba.feature.toggle.reader.ResourcesConfigReader
+import by.bulba.feature.toggle.reader.FirebaseFeatureToggleReader
+import by.bulba.feature.toggle.reader.ResourcesFeatureToggleReader
 import by.bulba.feature.toggle.reader.XmlConfigReader
 import by.bulba.feature.toggle.reader.XmlFileFeatureToggleReader
 import by.bulba.feature.toggle.sample.R
 import by.bulba.feature.toggle.util.DefaultConfigFileProvider
 import by.bulba.feature.toggle.util.XmlFileConfigReader
 import kotlinx.serialization.json.Json
+import kotlin.time.DurationUnit
+import kotlin.time.toDuration
 
 object FeatureToggleRegistrarHolder {
     @XmlRes
@@ -48,7 +51,13 @@ object FeatureToggleRegistrarHolder {
                         applicationContext = context,
                     ),
                 ),
-                ResourcesConfigReader(
+                FirebaseFeatureToggleReader(
+                    fetchTimeout = 60.toDuration(DurationUnit.SECONDS),
+                    minimumFetchInterval = 12.toDuration(DurationUnit.HOURS),
+                    json = json,
+                    defaultConfigRes = defaultXmlConfigResource,
+                ),
+                ResourcesFeatureToggleReader(
                     json = json,
                     configReader = xmlConfigReader,
                 ),
@@ -56,10 +65,7 @@ object FeatureToggleRegistrarHolder {
         )
         FeatureToggleContainerHolder.init(featureToggleContainer)
         FeatureToggleReaderHolder.init(featureToggleReader)
-        featureToggleRegistrar = FeatureToggleRegistrar(
-            featureToggleContainer = featureToggleContainer,
-            reader = featureToggleReader,
-        ).setupFeatures()
+        featureToggleRegistrar = FeatureToggleRegistrar().setupFeatures()
     }
 
     fun featureToggleProvider(): FeatureToggleProvider =

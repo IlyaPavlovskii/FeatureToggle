@@ -96,3 +96,4 @@ com-github-ben-manes-versions = "com.github.ben-manes.versions:0.41.0"
 nl-littlerobots-version-catalog-update = "nl.littlerobots.version-catalog-update:0.7.0"
 org-jetbrains-kotlin-android = "org.jetbrains.kotlin.android:1.7.20"
 org-jetbrains-kotlin-serialization = "org.jetbrains.kotlin.plugin.serialization:1.8.0-RC2"
+google-services = { id = "com.google.gms.google-services", version = "4.3.13" }

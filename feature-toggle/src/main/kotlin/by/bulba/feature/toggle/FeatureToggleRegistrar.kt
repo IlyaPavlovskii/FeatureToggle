@@ -1,14 +1,15 @@
 package by.bulba.feature.toggle
 
 import by.bulba.feature.toggle.reader.FeatureToggleReader
+import by.bulba.feature.toggle.reader.FeatureToggleReaderHolder
 import kotlin.reflect.KClass
 
 /**
  * Common place for register [FeatureToggle] and setup feature values.
  * */
 class FeatureToggleRegistrar(
-    featureToggleContainer: FeatureToggleContainer,
-    private val reader: FeatureToggleReader,
+    featureToggleContainer: FeatureToggleContainer = FeatureToggleContainerHolder.getContainer(),
+    private val reader: FeatureToggleReader = FeatureToggleReaderHolder.getFeatureToggleReader(),
 ) : FeatureToggleProvider {
 
     private var featuresMap = hashMapOf<KClass<out FeatureToggle>, FeatureToggle>()

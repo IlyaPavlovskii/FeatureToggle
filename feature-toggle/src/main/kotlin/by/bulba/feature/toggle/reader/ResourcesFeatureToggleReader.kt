@@ -6,12 +6,11 @@ import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
-import java.lang.ref.WeakReference
 
 /**
  * Processes configuration from default local XML config.
  * */
-class ResourcesConfigReader(
+class ResourcesFeatureToggleReader(
     private val json: Json,
     private val configReader: ConfigReader,
 ) : FeatureToggleReader {
