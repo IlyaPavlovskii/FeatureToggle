@@ -19,6 +19,7 @@ firebase-bom = "31.1.1"
 org-jetbrains-kotlin = "1.7.20"
 org-jetbrains-kotlinx = "1.6.4"
 org-jetbrains-kotlinx-serialization-json = "1.4.1"
+lib-verion = "1.0"
 
 [libraries]
 androidx-activity = { module = "androidx.activity:activity", version.ref = "androidx-activity" }

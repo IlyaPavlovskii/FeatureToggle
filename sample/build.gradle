@@ -50,6 +50,7 @@ dependencies {
     implementation libs.androidx.compose.ui.ui.graphics
     implementation libs.androidx.compose.ui.ui.tooling.preview
     implementation libs.androidx.compose.material3
+    implementation libs.org.jetbrains.kotlinx.kotlinx.serialization.json
     implementation project(":debug-panel")
     implementation project(":feature-toggle")
     implementation project(":utils:design-system")
