@@ -291,6 +291,16 @@ internal class FeatureToggleSampleApplication : Application() {
 
 </details>
 
+### DebugPanel
+If you want to use `debug-panel`, just add the next dependency:
+
+```
+implementation("by.bulba.feature.toggle:debug.panel:X.X.X")
+```
+
+Then, in your application will be available the next launcher: `DebugPanel` with the icon <img src="debug-panel/src/main/res/mipmap-xhdpi/ic_debug_panel_launcher.png" alt="FeatureToggle example" style="width:48px;"/>
+
+
 ---------------------------------------------------------------------------------
 ## License
 ```
@@ -306,7 +316,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ```
 ---------------------------------------------------------------------------------
-### Donate
+## Donate
 If you want to thank me or contribute to the development of the backlog, you may donate me. That helps me to concentrate more on the project.
 
 [!["PayPal"](https://raw.githubusercontent.com/IlyaPavlovskii/IlyaPavlovskii/main/resources/paypal.svg)](https://www.paypal.com/paypalme/ipavlovskii)
