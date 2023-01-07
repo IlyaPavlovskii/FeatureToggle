@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<defaultsMap>
+    <entry>
+        <key>sample_title</key>
+        <value>{
+            "enabled":true,
+            "title":"Sample Prod version"
+            }
+        </value>
+        <key>restaurant_info</key>
+        <value>{
+            "map_visible": true,
+            "delivery_costs_visible": false,
+            "rating_visible":false
+            }
+        </value>
+        <key>menu_item</key>
+        <value>{
+            "enabled":true,
+            "type":"LIST_VERTICAL",
+            "grid_count":2,
+            "add_to_cart_available":true
+            }
+        </value>
+    </entry>
+</defaultsMap>

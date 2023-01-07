@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <defaultsMap>
     <entry>
-        <key>menu_item</key>
+        <key>sample_title</key>
         <value>{
             "enabled":true,
-            "type":"GRID",
-            "grid_count":2,
-            "add_to_cart_available":true
+            "title":"Sample Dev version"
             }
         </value>
         <key>restaurant_info</key>
         <value>{
             "map_visible": false,
             "delivery_costs_visible": true,
-            "rating_visible":true
+            "rating_visible":false
+            }
+        </value>
+        <key>menu_item</key>
+        <value>{
+            "enabled":true,
+            "type":"GRID",
+            "grid_count":2,
+            "add_to_cart_available":true
             }
         </value>
     </entry>

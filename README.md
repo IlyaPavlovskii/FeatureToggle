@@ -152,6 +152,7 @@ Here we have 3 readers:
 
 1. `XmlFileFeatureToggleReader` - reader with highest priority. If there is a debug file on the device, the reader looks for all `FeatureToggle` keys and overrides its value. If key was found, the next readers will be skipped.
 2. `FirebaseFeatureToggleReader` - remote configuration reader. Any `FeatureToggle` might be overriden remotely. The system can be arbitrary. In our case it's Firebase. If key was found, the next readers will be skipped.
+<img src="resources/firebase-feature-toggle.png"/>
 3. `ResourcesFeatureToggleReader` - default configuration that must be declared in `R.xml.default_feature_toggle_config` file.
 
 ```

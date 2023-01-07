@@ -21,8 +21,15 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    flavorDimensions "version"
+    productFlavors {
+        dev {
+        }
+        prod {
         }
     }
     compileOptions {
@@ -51,11 +58,12 @@ dependencies {
     implementation libs.androidx.compose.ui.ui.tooling.preview
     implementation libs.androidx.compose.material3
     implementation libs.org.jetbrains.kotlinx.kotlinx.serialization.json
-    implementation project(":debug-panel")
     implementation project(":feature-toggle")
     implementation project(":utils:design-system")
     implementation platform(libs.firebase.bom)
     implementation libs.firebase.config.ktx
+
+    devImplementation project(":debug-panel")
 
     testImplementation libs.junit
 

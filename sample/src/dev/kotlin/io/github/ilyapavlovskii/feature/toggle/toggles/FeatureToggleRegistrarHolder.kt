@@ -1,4 +1,4 @@
-package io.github.ilyapavlovskii.feature.toggle.sample.toggles
+package io.github.ilyapavlovskii.feature.toggle.toggles
 
 import android.content.Context
 import androidx.annotation.XmlRes
@@ -15,12 +15,14 @@ import io.github.ilyapavlovskii.feature.toggle.reader.ResourcesFeatureToggleRead
 import io.github.ilyapavlovskii.feature.toggle.reader.XmlConfigReader
 import io.github.ilyapavlovskii.feature.toggle.reader.XmlFileFeatureToggleReader
 import io.github.ilyapavlovskii.feature.toggle.sample.R
+import io.github.ilyapavlovskii.feature.toggle.sample.toggles.MenuItemFeatureToggle
+import io.github.ilyapavlovskii.feature.toggle.sample.toggles.RestaurantInfoFeatureToggle
+import io.github.ilyapavlovskii.feature.toggle.sample.toggles.SampleTitleFeatureToggle
 import io.github.ilyapavlovskii.feature.toggle.util.DefaultConfigFileProvider
 import io.github.ilyapavlovskii.feature.toggle.util.XmlFileConfigReader
 import kotlinx.serialization.json.Json
 import kotlin.time.Duration.Companion.hours
 import kotlin.time.Duration.Companion.seconds
-import kotlin.time.toDuration
 
 object FeatureToggleRegistrarHolder {
     private val json: Json = Json.Default

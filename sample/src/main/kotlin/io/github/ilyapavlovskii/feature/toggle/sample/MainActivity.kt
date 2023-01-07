@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.dp
 import io.github.ilyapavlovskii.feature.toggle.design.system.theme.FeatureToggleTheme
 import io.github.ilyapavlovskii.feature.toggle.get
 import io.github.ilyapavlovskii.feature.toggle.sample.compose.MenuItemCollection
-import io.github.ilyapavlovskii.feature.toggle.sample.toggles.FeatureToggleRegistrarHolder
+import io.github.ilyapavlovskii.feature.toggle.toggles.FeatureToggleRegistrarHolder
 import io.github.ilyapavlovskii.feature.toggle.sample.toggles.MenuItemFeatureToggle
 import io.github.ilyapavlovskii.feature.toggle.sample.toggles.RestaurantInfoFeatureToggle
 import io.github.ilyapavlovskii.feature.toggle.sample.toggles.SampleTitleFeatureToggle
