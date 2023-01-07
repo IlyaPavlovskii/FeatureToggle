@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="by.bulba.feature.toggle.debug.panel">
+    package="io.github.ilyapavlovskii.feature.toggle.debug.panel">
 
     <application>
         <activity

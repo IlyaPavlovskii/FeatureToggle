@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:628504908624:android:9829a079a2e3dcbea7d255",
         "android_client_info": {
-          "package_name": "by.bulba.feature.toggle"
+          "package_name": "io.github.ilyapavlovskii.feature.toggle"
         }
       },
       "oauth_client": [
@@ -38,7 +38,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:628504908624:android:ae843a85e0c6b495a7d255",
         "android_client_info": {
-          "package_name": "by.bulba.feature.toggle.sample"
+          "package_name": "io.github.ilyapavlovskii.feature.toggle.sample"
         }
       },
       "oauth_client": [

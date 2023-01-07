@@ -20,13 +20,13 @@ dependencyResolutionManagement {
 Connect `feature-toggle` library to your project to start using it:
 
 ```
-implementation("by.bulba.feature.toggle:feature.toggle:X.X.X")
+implementation("io.github.ilyapavlovskii.feature.toggle:feature.toggle:X.X.X")
 ```
 
 If you want to use `debug-panel`, just add the next dependency:
 
 ```
-implementation("by.bulba.feature.toggle:debug.panel:X.X.X")
+implementation("io.github.ilyapavlovskii.feature.toggle:debug.panel:X.X.X")
 ```
 
 ---------------------------------------------------------------------------

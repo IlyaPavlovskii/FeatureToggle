@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace 'by.bulba.feature.toggle.design.system'
+    namespace 'io.github.ilyapavlovskii.feature.toggle.design.system'
     compileSdk libs.versions.compileSdk.get().toInteger()
 
     defaultConfig {

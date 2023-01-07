@@ -8,16 +8,16 @@ plugins {
 publishing {
     publications {
         maven(MavenPublication) {
-            groupId = 'by.bulba.feature.toggle'
+            groupId = 'io.github.ilyapavlovskii'
             artifactId = 'feature.toggle'
-            version = libs.versions.lib.verion.get()
+            version = libs.versions.versionName.get()
             artifact("$buildDir/outputs/aar/feature-toggle-debug.aar")
         }
     }
 }
 
 android {
-    namespace 'by.bulba.feature.toggle'
+    namespace 'io.github.ilyapavlovskii.feature.toggle'
     compileSdk libs.versions.compileSdk.get().toInteger()
 
     defaultConfig {

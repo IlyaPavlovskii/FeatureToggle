@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace 'by.bulba.feature.toggle.sample'
+    namespace 'io.github.ilyapavlovskii.feature.toggle.sample'
     compileSdk libs.versions.compileSdk.get().toInteger()
 
     defaultConfig {
-        applicationId "by.bulba.feature.toggle.sample"
+        applicationId "io.github.ilyapavlovskii.feature.toggle.sample"
         minSdk libs.versions.minSdk.get().toInteger()
         targetSdk libs.versions.targetSdk.get().toInteger()
         versionCode libs.versions.versionCode.get().toInteger()
