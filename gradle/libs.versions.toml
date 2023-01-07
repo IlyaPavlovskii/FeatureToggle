@@ -97,3 +97,4 @@ nl-littlerobots-version-catalog-update = "nl.littlerobots.version-catalog-update
 org-jetbrains-kotlin-android = "org.jetbrains.kotlin.android:1.7.20"
 org-jetbrains-kotlin-serialization = "org.jetbrains.kotlin.plugin.serialization:1.8.0-RC2"
 google-services = { id = "com.google.gms.google-services", version = "4.3.13" }
+gradle-nexus-publish = { id = "io.github.gradle-nexus.publish-plugin", version = "1.1.0" }

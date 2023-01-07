@@ -12,6 +12,25 @@ publishing {
             artifactId = 'feature.toggle'
             version = libs.versions.versionName.get()
             artifact("$buildDir/outputs/aar/feature-toggle-debug.aar")
+
+            pom {
+                name = "FeatureToggle"
+                description = 'Android FeatureToggle library which helps to provide feature toggles on any flavors.'
+                url = 'https://github.com/IlyaPavlovskii/FeatureToggle/'
+                licenses {
+                    license {
+                        name = 'Apache License, Version 2.0'
+                        url = 'https://github.com/IlyaPavlovskii/FeatureToggle/LICENSE'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'IlyaPavlovskii'
+                        name = 'Ilia Pavlovskii'
+                        email = 'pavlovskii.ilya@gmail.com'
+                    }
+                }
+            }
         }
     }
 }

@@ -12,6 +12,25 @@ publishing {
             artifactId = 'debug.panel'
             version = libs.versions.versionName.get()
             artifact("$buildDir/outputs/aar/debug-panel-debug.aar")
+
+            pom {
+                name = "FeatureToggle"
+                description = 'Android FeatureToggle debug panel to edit toggles by separate launcher.'
+                url = 'https://github.com/IlyaPavlovskii/FeatureToggle/'
+                licenses {
+                    license {
+                        name = 'Apache License, Version 2.0'
+                        url = 'https://github.com/IlyaPavlovskii/FeatureToggle/LICENSE'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'IlyaPavlovskii'
+                        name = 'Ilia Pavlovskii'
+                        email = 'pavlovskii.ilya@gmail.com'
+                    }
+                }
+            }
         }
     }
 }

@@ -8,6 +8,7 @@ import io.github.ilyapavlovskii.feature.toggle.FeatureToggleProvider
 import io.github.ilyapavlovskii.feature.toggle.FeatureToggleRegistrar
 import io.github.ilyapavlovskii.feature.toggle.SimpleFeatureToggleContainer
 import io.github.ilyapavlovskii.feature.toggle.reader.ChainFeatureToggleReader
+import io.github.ilyapavlovskii.feature.toggle.reader.ConfigReader
 import io.github.ilyapavlovskii.feature.toggle.reader.FeatureToggleReaderHolder
 import io.github.ilyapavlovskii.feature.toggle.reader.FirebaseFeatureToggleReader
 import io.github.ilyapavlovskii.feature.toggle.reader.ResourcesFeatureToggleReader
@@ -17,10 +18,12 @@ import io.github.ilyapavlovskii.feature.toggle.sample.R
 import io.github.ilyapavlovskii.feature.toggle.util.DefaultConfigFileProvider
 import io.github.ilyapavlovskii.feature.toggle.util.XmlFileConfigReader
 import kotlinx.serialization.json.Json
-import kotlin.time.DurationUnit
+import kotlin.time.Duration.Companion.hours
+import kotlin.time.Duration.Companion.seconds
 import kotlin.time.toDuration
 
 object FeatureToggleRegistrarHolder {
+    private val json: Json = Json.Default
     @XmlRes
     private val defaultXmlConfigResource: Int = R.xml.default_feature_toggle_config
     private var featureToggleRegistrar: FeatureToggleRegistrar? = null
@@ -46,11 +49,7 @@ object FeatureToggleRegistrarHolder {
     )
 
     fun init(context: Context) {
-        val json = Json.Default
-        val xmlConfigReader = XmlConfigReader(
-            context = context,
-            xmlRes = defaultXmlConfigResource,
-        )
+        val xmlConfigReader = createXmlConfigReader(context)
         val featureToggleReader = ChainFeatureToggleReader(
             featureReaders = arrayOf(
                 XmlFileFeatureToggleReader(
@@ -61,8 +60,8 @@ object FeatureToggleRegistrarHolder {
                     ),
                 ),
                 FirebaseFeatureToggleReader(
-                    fetchTimeout = 60.toDuration(DurationUnit.SECONDS),
-                    minimumFetchInterval = 12.toDuration(DurationUnit.HOURS),
+                    fetchTimeout = 60.seconds,
+                    minimumFetchInterval = 12.hours,
                     json = json,
                     defaultConfigRes = defaultXmlConfigResource,
                 ),
@@ -76,6 +75,11 @@ object FeatureToggleRegistrarHolder {
         FeatureToggleReaderHolder.init(featureToggleReader)
         featureToggleRegistrar = FeatureToggleRegistrar().setupFeatures()
     }
+
+    private fun createXmlConfigReader(context: Context): ConfigReader = XmlConfigReader(
+        context = context,
+        xmlRes = defaultXmlConfigResource,
+    )
 
     fun featureToggleProvider(): FeatureToggleProvider =
         requireNotNull(featureToggleRegistrar)

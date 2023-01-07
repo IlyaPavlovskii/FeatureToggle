@@ -25,7 +25,6 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import io.github.ilyapavlovskii.feature.toggle.design.system.theme.FeatureToggleTheme
 import io.github.ilyapavlovskii.feature.toggle.get
-import io.github.ilyapavlovskii.feature.toggle.sample.R
 import io.github.ilyapavlovskii.feature.toggle.sample.compose.MenuItemCollection
 import io.github.ilyapavlovskii.feature.toggle.sample.toggles.FeatureToggleRegistrarHolder
 import io.github.ilyapavlovskii.feature.toggle.sample.toggles.MenuItemFeatureToggle
@@ -39,7 +38,7 @@ internal class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val featureToggleProvider = FeatureToggleRegistrarHolder.featureToggleProvider()
-        val sampleTitleFeatureToggle = featureToggleProvider.get<SampleTitleFeatureToggle>()
+        val sampleTitleFeatureToggle: SampleTitleFeatureToggle = featureToggleProvider.get()
         val restaurantInfoFeatureToggle = featureToggleProvider.get<RestaurantInfoFeatureToggle>()
         val menuItemFeatureToggle = featureToggleProvider.get<MenuItemFeatureToggle>()
 
@@ -67,7 +66,9 @@ internal class MainActivity : ComponentActivity() {
                                 style = MaterialTheme.typography.titleMedium,
                             )
                             Image(
-                                modifier = Modifier.fillMaxWidth().height(200.dp),
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(200.dp),
                                 bitmap = ImageBitmap.imageResource(
                                     id = viewState.value.restaurantInfo.mapImage
                                 ),
