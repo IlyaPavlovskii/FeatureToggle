@@ -11,9 +11,9 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-//        maven {
-//            url = uri("https://s01.oss.sonatype.org/")
-//        }
+        maven {
+            url = uri("https://s01.oss.sonatype.org/service/local/repositories/iogithubilyapavlovskii-1003/content/")
+        }
     }
 }
 rootProject.name = "FeatureToggle"
