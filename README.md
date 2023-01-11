@@ -13,7 +13,9 @@ Just add the next repository to the dependency resolution manager:
 ```
 dependencyResolutionManagement {
     repositories {
-    	// Use staging maven repository until the publish version on review    	 
+    	// Use staging maven repository until the publish version on review
+    	mavenCentral() 
+    	// or    	 
     	maven {
             url = uri("https://s01.oss.sonatype.org/service/local/repositories/releases/content/")
         }
