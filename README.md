@@ -15,7 +15,7 @@ dependencyResolutionManagement {
     repositories {
     	// Use staging maven repository until the publish version on review    	 
     	maven {
-            url = uri("https://s01.oss.sonatype.org/service/local/repositories/iogithubilyapavlovskii-1003/content/")
+            url = uri("https://s01.oss.sonatype.org/service/local/repositories/releases/content/")
         }
     }
 }

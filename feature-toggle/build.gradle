@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.org.jetbrains.kotlin.android)
     alias(libs.plugins.org.jetbrains.kotlin.serialization)
     id 'maven-publish'
+    id 'signing'
 }
 
 publishing {
@@ -30,9 +31,21 @@ publishing {
                         email = 'pavlovskii.ilya@gmail.com'
                     }
                 }
+                scm {
+                    url = 'https://github.com/IlyaPavlovskii/FeatureToggle/'
+                }
             }
         }
     }
+}
+
+signing {
+    useInMemoryPgpKeys(
+            rootProject.ext["signing.keyId"],
+            rootProject.ext["signing.key"],
+            rootProject.ext["signing.password"],
+    )
+    sign publishing.publications
 }
 
 android {
