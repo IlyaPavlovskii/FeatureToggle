@@ -90,8 +90,8 @@ org-jetbrains-kotlinx-kotlinx-coroutines-core-jvm = { module = "org.jetbrains.ko
 org-jetbrains-kotlinx-kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "org-jetbrains-kotlinx-serialization-json"}
 
 [plugins]
-com-android-application = "com.android.application:8.0.0-alpha10"
-com-android-library = "com.android.library:8.0.0-alpha10"
+com-android-application = "com.android.application:8.1.0-alpha11"
+com-android-library = "com.android.library:8.1.0-alpha11"
 com-github-ben-manes-versions = "com.github.ben-manes.versions:0.41.0"
 nl-littlerobots-version-catalog-update = "nl.littlerobots.version-catalog-update:0.7.0"
 org-jetbrains-kotlin-android = "org.jetbrains.kotlin.android:1.7.20"
