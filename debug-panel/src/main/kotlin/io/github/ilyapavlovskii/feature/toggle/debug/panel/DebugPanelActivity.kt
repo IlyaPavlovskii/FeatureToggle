@@ -42,7 +42,7 @@ import io.github.ilyapavlovskii.feature.toggle.debug.panel.model.DebugPanelViewS
 import io.github.ilyapavlovskii.feature.toggle.debug.panel.model.PresentationFieldItem
 import io.github.ilyapavlovskii.feature.toggle.design.system.theme.FeatureToggleTheme
 
-internal class DebugPanelActivity : ComponentActivity() {
+class DebugPanelActivity : ComponentActivity() {
 
     private val viewModel: DebugPanelViewModel by viewModels {
         DebugPanelViewModel.factory(

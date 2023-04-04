@@ -1,19 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="io.github.ilyapavlovskii.feature.toggle.debug.panel">
-
-    <application>
-        <activity
-            android:name=".DebugPanelActivity"
-            android:exported="true"
-            android:icon="@mipmap/ic_debug_panel_launcher"
-            android:label="@string/debug_panel__short_label"
-            android:launchMode="singleTask"
-            android:noHistory="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-    </application>
-</manifest>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"/>
